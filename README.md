@@ -7,6 +7,7 @@
 - `site/data/weights.csv` — ежедневный вес (`date,weight_kg,note`)
 - `site/data/weeks.json` — список недель
 - `site/reports/week-NN.md` — отчёт за неделю: анализ и что изменилось в плане
+- `site/menus/week-NN.json` — меню на неделю (из него события попадают в Google Calendar)
 
 Сырые `.fit`-файлы в репозиторий не добавляются (содержат GPS-маршруты). Публикуются только сводки.
 
