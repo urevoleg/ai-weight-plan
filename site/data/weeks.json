@@ -1,0 +1,9 @@
+[
+  {
+    "id": "week-01",
+    "title": "Неделя 1",
+    "dates": "26.10 – 01.11",
+    "status": "идёт",
+    "report": "reports/week-01.md"
+  }
+]
