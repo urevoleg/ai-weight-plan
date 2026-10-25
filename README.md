@@ -15,4 +15,4 @@
 
 ## Для агентов (OpenCode и др.)
 
-Контекст, правила и порядок работы — в [`AGENTS.md`](AGENTS.md). Конфиг OpenCode — `opencode.json`, команды — `.opencode/command/` (`/log-weight`, `/ingest-fit`, `/weekly-review`). Скрипты: `scripts/weekly_stats.py`, `scripts/summarize_fit.py` (нужен `pip install fitparse`).
+Контекст, правила и порядок работы — в [`AGENTS.md`](AGENTS.md). Конфиг OpenCode — `opencode.json`, команды — `.opencode/command/` (`/log-weight`, `/ingest-fit`, `/weekly-review`). Скрипты: `scripts/weekly_stats.py`, `scripts/summarize_fit.py` (запасной вариант для `.fit`, если Coros недоступен; нужен `pip install fitparse`).

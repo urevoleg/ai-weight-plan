@@ -34,7 +34,7 @@
 | `site/reports/week-NN.md` | отчёт за неделю; шаблон — `site/reports/_template.md` |
 | `site/menus/week-NN.json` | меню на неделю (источник для календаря); формат — `site/menus/_template.json` |
 | `scripts/weekly_stats.py` | недельные средние веса из `weights.csv` |
-| `scripts/summarize_fit.py` | сводка тренировок из `.fit` без GPS |
+| `scripts/summarize_fit.py` | запасной вариант: сводка тренировок из `.fit` без GPS (если Coros недоступен) |
 | `scripts/menu_to_ics.py` | меню → `.ics` для импорта в календарь (если нет доступа к Google Calendar) |
 | `.opencode/command/` | команды: `/log-weight`, `/ingest-fit`, `/weekly-review` |
 | `.github/workflows/pages.yml` | деплой `site/` на GitHub Pages при пуше в `main` |
@@ -55,7 +55,7 @@
 ### Ежедневно (когда пользователь прислал данные)
 
 1. Добавить строку в `site/data/weights.csv` (`/log-weight 73.8`). Вес — утренний, в кг с одним знаком.
-2. Если пришла тренировка — получить сводку (`/ingest-fit`) и добавить строку в `site/data/workouts.csv`.
+2. Тренировки брать из коннектора Coros (`/ingest-fit`) и добавлять строки в `site/data/workouts.csv`. `.fit`-файл нужен, только если Coros недоступен.
 3. План в этот день не менять: суточный вес колеблется на 0,5–1 кг из-за воды и гликогена, особенно после длительной.
 
 ### Еженедельно (воскресенье вечером, за неделю пн–вс, которая заканчивается в этот день)
@@ -114,14 +114,14 @@
 
 ## 6. Источники данных Coros
 
-Если подключён MCP Coros, использовать инструменты:
+**Основной источник — коннектор Coros.** Сначала всегда пробовать его. Инструменты:
 
 - `querySportRecords` — список активностей за период;
 - `getActivityDetail`, `queryActivityLapData` — детали и круги;
-- `downloadActivityFitFiles` — исходные `.fit` (только для локального разбора, не коммитить);
+- `downloadActivityFitFiles` — исходные `.fit` (нужны редко, только для локального разбора, не коммитить);
 - `queryRestingHeartRate`, `querySleepOverview`, `querySleepHrv`, `queryRecoveryStatus`, `queryTrainingLoadAssessment` — восстановление и нагрузка.
 
-Если MCP нет, пользователь кладёт `.fit` в `inbox/` (папка в `.gitignore`), агент запускает `python3 -I scripts/summarize_fit.py inbox/*.fit`.
+**Запасной вариант.** Только если коннектор Coros недоступен или вернул ошибку после одной повторной попытки: пользователь кладёт `.fit` в `inbox/` (папка в `.gitignore`), агент запускает `python3 -I scripts/summarize_fit.py inbox/*.fit --csv` (нужен `pip install fitparse`; скрипт пока проверен только на синтаксис). В отчёте отметить, что данные взяты из `.fit`.
 
 Важно: калории в `.fit` — оценка часов, не точный расход. Использовать как относительный показатель, не как основание для изменения цели.
 
