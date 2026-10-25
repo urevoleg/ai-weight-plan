@@ -11,3 +11,7 @@
 Сырые `.fit`-файлы в репозиторий не добавляются (содержат GPS-маршруты). Публикуются только сводки.
 
 Публикация: Settings → Pages → Source: GitHub Actions. Workflow `.github/workflows/pages.yml` запускается при каждом пуше в `main`.
+
+## Для агентов (OpenCode и др.)
+
+Контекст, правила и порядок работы — в [`AGENTS.md`](AGENTS.md). Конфиг OpenCode — `opencode.json`, команды — `.opencode/command/` (`/log-weight`, `/ingest-fit`, `/weekly-review`). Скрипты: `scripts/weekly_stats.py`, `scripts/summarize_fit.py` (нужен `pip install fitparse`).
