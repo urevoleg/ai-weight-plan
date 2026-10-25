@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Недельные средние веса из site/data/weights.csv (недели пн-вс).
+"""Недельные средние веса из site/data/weights.csv (недели вс-сб).
 
 Использование:
     python3 scripts/weekly_stats.py [путь/к/weights.csv]
@@ -17,8 +17,9 @@ DEFAULT = Path(__file__).resolve().parent.parent / "site" / "data" / "weights.cs
 MIN_POINTS = 4
 
 
-def monday(d: date) -> date:
-    return d - timedelta(days=d.weekday())
+def week_start(d: date) -> date:
+    """Воскресенье, с которого начинается неделя вс–сб, куда входит дата d."""
+    return d - timedelta(days=(d.weekday() + 1) % 7)
 
 
 def load(path: Path):
@@ -40,7 +41,7 @@ def main():
         return
     weeks = {}
     for d, w in rows:
-        weeks.setdefault(monday(d), []).append(w)
+        weeks.setdefault(week_start(d), []).append(w)
     print("| Неделя с | Измерений | Среднее, кг | К прошлой, кг | Мин | Макс | Заметка |")
     print("| --- | --- | --- | --- | --- | --- | --- |")
     prev = None
