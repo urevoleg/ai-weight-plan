@@ -39,6 +39,7 @@
 | `scripts/shopping_list.py` | список закупок из меню недели (суммы по продуктам) |
 | `site/data/products.md` | заметки по продуктам с этикеток (КБЖУ, сахар, соль) по фото от пользователя |
 | `.opencode/command/` | команды: `/log-weight`, `/ingest-fit`, `/weekly-review` |
+| `site/data/meals.csv` | дневник питания: дата, время, приём, описание, ккал, белок, заметка (оценки помечаются «оценка») |
 | `.github/workflows/pages.yml` | деплой `site/` на GitHub Pages при пуше в `main` |
 
 ## 4. Цели по калориям (из `site/plan.md`)
