@@ -1,6 +1,12 @@
 (function () {
-  var START = 0, TARGET_LO = 67, TARGET_HI = 68;
+  var START = 0, TARGET_LO = 67, TARGET_HI = 68, ZONE_HI = 70;
+  var WIN = 14, MIN_N = 7;
   var DAY = 86400000;
+  // t-критерий для 95% двусторонного интервала, df = 1..30; дальше ~1.96
+  var T975 = [null, 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228,
+    2.201, 2.179, 2.160, 2.145, 2.131, 2.120, 2.110, 2.101, 2.093, 2.086, 2.080, 2.074,
+    2.069, 2.064, 2.060, 2.056, 2.052, 2.048, 2.045, 2.042];
+  function tcrit(df) { return df <= 30 ? T975[df] : 1.96; }
 
   function $(id) { return document.getElementById(id); }
   function fail(msg) { var e = $('err'); e.textContent = msg; e.hidden = false; }
@@ -43,13 +49,27 @@
     return rows;
   }
 
+  // 95% доверительный интервал среднего за последние WIN дней, оканчивающиеся на rows[i]
+  function ciAt(rows, i) {
+    var end = rows[i].t;
+    var win = rows.filter(function (x) { return x.t <= end && x.t > end - WIN * DAY; });
+    var n = win.length;
+    if (n < MIN_N) return null;
+    var mean = win.reduce(function (s, x) { return s + x.w; }, 0) / n;
+    var sd = Math.sqrt(win.reduce(function (s, x) { return s + (x.w - mean) * (x.w - mean); }, 0) / (n - 1));
+    var h = tcrit(n - 1) * sd / Math.sqrt(n);
+    return { n: n, mean: mean, sd: sd, lo: mean - h, hi: mean + h };
+  }
+
   function stats(rows) {
-    var last = rows[rows.length - 1];
+    var li = rows.length - 1, last = rows[li];
+    var c = ciAt(rows, li);
     var cards = [
       [fmt(last.w), 'последний вес, кг (' + fmtDate(last.t) + ')'],
-      [last.n >= 4 ? fmt(last.avg) : '—', 'среднее за 7 дней, кг'],
-      [last.n >= 4 ? (last.avg - START > 0 ? '+' : '') + fmt(last.avg - START) : '—', 'к старту (' + fmt(START) + '), кг'],
-      [last.n >= 4 ? fmt(Math.max(0, last.avg - TARGET_HI)) : '—', 'до цели 68 кг, кг']
+      [c ? fmt(c.mean) : '—', 'среднее за 14 дней, кг'],
+      [c ? fmt(c.lo) + '–' + fmt(c.hi) : 'мало данных', '95% ДИ, кг (нужно ≥ ' + MIN_N + ' измерений)'],
+      [c ? (c.hi <= TARGET_HI ? 'да' : 'нет') : '—', 'цель достигнута: верхняя граница ≤ 68 кг'],
+      [c ? (c.mean - START > 0 ? '+' : '') + fmt(c.mean - START) : '—', 'среднее к старту (' + fmt(START) + '), кг']
     ];
     $('stats').innerHTML = cards.map(function (c) {
       return '<div class="stat"><b>' + c[0] + '</b><span>' + c[1] + '</span></div>';
@@ -61,19 +81,33 @@
     var t0 = rows[0].t, t1 = Math.max(rows[rows.length - 1].t, t0 + 14 * DAY);
     var ws = rows.map(function (r) { return r.w; });
     var ymin = Math.floor(Math.min.apply(null, ws.concat([TARGET_LO])) - 0.5);
-    var ymax = Math.ceil(Math.max.apply(null, ws.concat([TARGET_HI])) + 0.5);
+    var ymax = Math.ceil(Math.max.apply(null, ws.concat([ZONE_HI])) + 0.5);
     function x(t) { return L + (t - t0) / (t1 - t0) * (W - L - R); }
     function y(v) { return T + (ymax - v) / (ymax - ymin) * (H - T - B); }
     var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="График веса">';
+
+    // зоны: жёлтая 68–70, зелёная ниже 68 (цель 67–68 и глубже)
+    s += '<rect x="' + L + '" y="' + y(ZONE_HI) + '" width="' + (W - L - R) + '" height="' + (y(TARGET_HI) - y(ZONE_HI)) + '" fill="var(--zone-yellow)"/>';
+    s += '<rect x="' + L + '" y="' + y(TARGET_HI) + '" width="' + (W - L - R) + '" height="' + (y(ymin) - y(TARGET_HI)) + '" fill="var(--zone-green)"/>';
+
     for (var v = ymin; v <= ymax; v++) {
       s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="var(--line)"/>';
       s += '<text x="' + (L - 8) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="var(--muted)">' + v + '</text>';
     }
-    s += '<rect x="' + L + '" y="' + y(TARGET_HI) + '" width="' + (W - L - R) + '" height="' + (y(TARGET_LO) - y(TARGET_HI)) + '" fill="var(--band)"/>';
     var step = Math.ceil((t1 - t0) / DAY / 8) * DAY;
     for (var t = t0; t <= t1; t += step) {
       s += '<text x="' + x(t) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="var(--muted)">' + fmtDate(t) + '</text>';
     }
+
+    // полоса 95% ДИ по скользящему окну
+    var cis = [];
+    rows.forEach(function (r, i) { var c = ciAt(rows, i); if (c) cis.push({ t: r.t, c: c }); });
+    if (cis.length >= 2) {
+      var up = cis.map(function (p, i) { return (i ? 'L' : 'M') + x(p.t).toFixed(1) + ' ' + y(p.c.hi).toFixed(1); });
+      var down = cis.slice().reverse().map(function (p) { return 'L' + x(p.t).toFixed(1) + ' ' + y(p.c.lo).toFixed(1); });
+      s += '<path d="' + up.concat(down).join(' ') + ' Z" fill="var(--ci)" stroke="none"/>';
+    }
+
     var daily = rows.map(function (r, i) {
       return (i ? 'L' : 'M') + x(r.t).toFixed(1) + ' ' + y(r.w).toFixed(1);
     }).join(' ');
