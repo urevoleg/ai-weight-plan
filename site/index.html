@@ -7,14 +7,18 @@
 <meta name="description" content="План питания и недельные отчёты: 74 → 67–68 кг">
 <style>
   :root {
-    --bg: #fafaf7; --fg: #1d2420; --muted: #5d6a63; --card: #ffffff; --line: #dfe4df;
-    --accent: #1f7a5a; --avg: #1f7a5a; --dot: #8aa79a; --band: rgba(31,122,90,.14); --warn: #b5541f;
+    --bg: #eef2f8; --fg: #0a1222; --muted: #4a5b76; --card: #ffffff; --line: #d3dcea;
+    --accent: #1e40af; --avg: #0b1f4d; --dot: #2563eb; --band: rgba(37,99,235,.12); --warn: #1e3a8a;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111613; --fg: #e6ece8; --muted: #9baba2; --card: #181f1b; --line: #2a342e;
-      --accent: #4fc79c; --avg: #4fc79c; --dot: #5f7f70; --band: rgba(79,199,156,.16); --warn: #e58a55;
+    :root:not([data-theme="light"]) {
+      --bg: #050913; --fg: #e4ebf7; --muted: #8ea0bd; --card: #0b1322; --line: #1b2a44;
+      --accent: #60a5fa; --avg: #bfdbfe; --dot: #3b82f6; --band: rgba(96,165,250,.15); --warn: #93c5fd;
     }
+  }
+  :root[data-theme="dark"] {
+    --bg: #050913; --fg: #e4ebf7; --muted: #8ea0bd; --card: #0b1322; --line: #1b2a44;
+    --accent: #60a5fa; --avg: #bfdbfe; --dot: #3b82f6; --band: rgba(96,165,250,.15); --warn: #93c5fd;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
@@ -56,7 +60,7 @@
   <div class="card">
     <div id="chart"></div>
     <div class="legend">
-      <span><i style="background:var(--dot)"></i>вес за день</span>
+      <span><i style="background:var(--dot)"></i>вес за день (линия, точки — измерения)</span>
       <span><i style="background:var(--avg)"></i>среднее за 7 дней</span>
       <span><i style="background:var(--band)"></i>цель 67–68 кг</span>
     </div>
