@@ -28,6 +28,8 @@ def load(path: Path):
         for r in csv.DictReader(f):
             if not r.get("date") or not r.get("weight_kg"):
                 continue
+            if "исключ" in (r.get("note") or ""):
+                continue
             rows.append((date.fromisoformat(r["date"]), float(r["weight_kg"])))
     rows.sort()
     return rows

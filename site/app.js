@@ -1,5 +1,5 @@
 (function () {
-  var START = 74.0, TARGET_LO = 67, TARGET_HI = 68;
+  var START = 0, TARGET_LO = 67, TARGET_HI = 68;
   var DAY = 86400000;
 
   function $(id) { return document.getElementById(id); }
@@ -27,7 +27,8 @@
       var p = line.split(',');
       var t = Date.parse(p[0] + 'T00:00:00Z');
       var w = parseFloat(p[1]);
-      if (!isNaN(t) && !isNaN(w)) rows.push({ t: t, w: w, note: p.slice(2).join(',') });
+      var note = p.slice(2).join(',');
+      if (!isNaN(t) && !isNaN(w) && !/исключ/i.test(note)) rows.push({ t: t, w: w, note: note });
     });
     rows.sort(function (a, b) { return a.t - b.t; });
     return rows;
@@ -47,7 +48,7 @@
     var cards = [
       [fmt(last.w), 'последний вес, кг (' + fmtDate(last.t) + ')'],
       [last.n >= 4 ? fmt(last.avg) : '—', 'среднее за 7 дней, кг'],
-      [last.n >= 4 ? (last.avg - START > 0 ? '+' : '') + fmt(last.avg - START) : '—', 'к старту (74), кг'],
+      [last.n >= 4 ? (last.avg - START > 0 ? '+' : '') + fmt(last.avg - START) : '—', 'к старту (' + fmt(START) + '), кг'],
       [last.n >= 4 ? fmt(Math.max(0, last.avg - TARGET_HI)) : '—', 'до цели 68 кг, кг']
     ];
     $('stats').innerHTML = cards.map(function (c) {
@@ -111,7 +112,7 @@
 
   Promise.all([get('data/weights.csv'), get('data/weeks.json'), get('plan.md')]).then(function (r) {
     var rows = withAverage(parseCsv(r[0]));
-    if (rows.length) { stats(rows); chart(rows); }
+    if (rows.length) { START = rows[0].w; stats(rows); chart(rows); }
     weeks(JSON.parse(r[1]));
     md($('plan'), r[2]);
   }).catch(function (e) { fail('Не удалось загрузить данные: ' + e.message); });
