@@ -123,6 +123,23 @@
     $('chart').innerHTML = s;
   }
 
+  function fmtDateTime(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    var p = function (n) { return ('0' + n).slice(-2); };
+    return p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+
+  function badges(rows, meta) {
+    var out = [];
+    if (meta && meta.updated) out.push('<span class="badge"><i></i>Обновлено <b>' + fmtDateTime(meta.updated) + '</b></span>');
+    if (rows && rows.length) {
+      var last = rows[rows.length - 1];
+      out.push('<span class="badge"><i></i>Последнее измерение <b>' + fmtDate(last.t) + '</b>, ' + fmt(last.w) + ' кг</span>');
+    }
+    $('badges').innerHTML = out.join('');
+  }
+
   function weeks(list) {
     $('weeks').innerHTML = list.slice().reverse().map(function (w) {
       return '<li><a href="#report=' + w.id + '" data-id="' + w.id + '" data-path="' + w.report + '">' +
@@ -144,9 +161,14 @@
     show();
   }
 
-  Promise.all([get('data/weights.csv'), get('data/weeks.json'), get('plan.md')]).then(function (r) {
+  function meta() {
+    return get('data/updated.json').then(JSON.parse).catch(function () { return null; });
+  }
+
+  Promise.all([get('data/weights.csv'), get('data/weeks.json'), get('plan.md'), meta()]).then(function (r) {
     var rows = withAverage(parseCsv(r[0]));
     if (rows.length) { START = rows[0].w; stats(rows); chart(rows); }
+    badges(rows, r[3]);
     weeks(JSON.parse(r[1]));
     md($('plan'), r[2]);
   }).catch(function (e) { fail('Не удалось загрузить данные: ' + e.message); });

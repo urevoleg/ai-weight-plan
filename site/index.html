@@ -47,12 +47,17 @@
   #report { margin-top: 12px; }
   #err { color: var(--warn); }
   .note { color: var(--muted); font-size: .85rem; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: -12px 0 24px; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--muted); }
+  .badge b { color: var(--fg); font-weight: 600; }
+  .badge i { width: 6px; height: 6px; border-radius: 50%; background: var(--dot); display: inline-block; }
 </style>
 </head>
 <body>
 <main>
   <h1>План веса: цель 67–68 кг</h1>
   <p class="sub">Старт 26 октября 2026. Ежедневный вес и тренировки, недельный разбор и корректировки плана.</p>
+  <div class="badges" id="badges"></div>
   <p id="err" hidden></p>
 
   <div class="stats" id="stats"></div>
