@@ -115,7 +115,7 @@
     var avg = rows.filter(function (r) { return r.n >= 3; }).map(function (r, i) {
       return (i ? 'L' : 'M') + x(r.t).toFixed(1) + ' ' + y(r.avg).toFixed(1);
     }).join(' ');
-    if (avg) s += '<path d="' + avg + '" fill="none" stroke="var(--avg)" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round"/>';
+    if (avg) s += '<path d="' + avg + '" fill="none" stroke="var(--avg)" stroke-opacity="0.5" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round"/>';
     rows.forEach(function (r) {
       s += '<circle cx="' + x(r.t).toFixed(1) + '" cy="' + y(r.w).toFixed(1) + '" r="4.5" fill="var(--dot)" stroke="var(--card)" stroke-width="1.5"><title>' + fmtDate(r.t) + ': ' + fmt(r.w) + ' кг</title></circle>';
     });
