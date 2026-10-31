@@ -34,6 +34,11 @@
   .stat span { color: var(--muted); font-size: .85rem; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; overflow-x: auto; }
   svg { width: 100%; height: auto; display: block; }
+  .chart-wrap { position: relative; }
+  .weight-point { cursor: pointer; transition: r .12s ease, stroke-width .12s ease; }
+  .weight-point:hover, .weight-point:focus { r: 7px; stroke: var(--fg); stroke-width: 2.5; outline: none; }
+  .chart-tooltip { position: absolute; z-index: 2; transform: translate(-50%, -100%); pointer-events: none; white-space: nowrap; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--fg); color: var(--card); box-shadow: 0 8px 24px rgba(10,18,34,.2); font-size: .82rem; font-weight: 650; }
+  .chart-tooltip.below { transform: translate(-50%, 0); }
   table { border-collapse: collapse; width: 100%; font-size: .93rem; }
   th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
   th { color: var(--muted); font-weight: 600; }
@@ -64,7 +69,10 @@
 
   <h2>Вес</h2>
   <div class="card">
-    <div id="chart"></div>
+    <div class="chart-wrap" id="chart-wrap">
+      <div id="chart"></div>
+      <div class="chart-tooltip" id="chart-tooltip" role="tooltip" hidden></div>
+    </div>
     <div class="legend">
       <span><i style="background:var(--dot)"></i>вес за день (линия, точки — измерения)</span>
       <span><i style="background:var(--avg)"></i>среднее за 7 дней</span>

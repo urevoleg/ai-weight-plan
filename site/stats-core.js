@@ -25,5 +25,12 @@
     return last.avg <= threshold;
   }
 
-  return { withAverage: withAverage, goalReached: goalReached };
+  function pointLabel(timestamp, weight) {
+    var d = new Date(timestamp);
+    var pad = function (value) { return ('0' + value).slice(-2); };
+    var date = pad(d.getUTCDate()) + '.' + pad(d.getUTCMonth() + 1) + '.' + d.getUTCFullYear();
+    return date + ' · ' + weight.toFixed(1).replace('.', ',') + ' кг';
+  }
+
+  return { withAverage: withAverage, goalReached: goalReached, pointLabel: pointLabel };
 }));

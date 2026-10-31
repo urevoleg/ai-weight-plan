@@ -114,10 +114,35 @@
     }).join(' ');
     if (avg) s += '<path d="' + avg + '" fill="none" stroke="var(--avg)" stroke-opacity="0.5" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round"/>';
     rows.forEach(function (r) {
-      s += '<circle cx="' + x(r.t).toFixed(1) + '" cy="' + y(r.w).toFixed(1) + '" r="4.5" fill="var(--dot)" stroke="var(--card)" stroke-width="1.5"><title>' + fmtDate(r.t) + ': ' + fmt(r.w) + ' кг</title></circle>';
+      var label = window.WeightStats.pointLabel(r.t, r.w);
+      s += '<circle class="weight-point" tabindex="0" aria-label="' + label + '" data-label="' + label + '" cx="' + x(r.t).toFixed(1) + '" cy="' + y(r.w).toFixed(1) + '" r="5" fill="var(--dot)" stroke="var(--card)" stroke-width="1.5"/>';
     });
     s += '</svg>';
     $('chart').innerHTML = s;
+
+    var tooltip = $('chart-tooltip');
+    var wrap = $('chart-wrap');
+    function showTooltip(event) {
+      var point = event.currentTarget;
+      var pointRect = point.getBoundingClientRect();
+      var wrapRect = wrap.getBoundingClientRect();
+      tooltip.textContent = point.getAttribute('data-label');
+      tooltip.hidden = false;
+      var left = pointRect.left - wrapRect.left + pointRect.width / 2;
+      left = Math.max(tooltip.offsetWidth / 2 + 4, Math.min(wrapRect.width - tooltip.offsetWidth / 2 - 4, left));
+      var top = pointRect.top - wrapRect.top - 8;
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = top + 'px';
+      tooltip.classList.toggle('below', top < tooltip.offsetHeight);
+      if (top < tooltip.offsetHeight) tooltip.style.top = (pointRect.bottom - wrapRect.top + 8) + 'px';
+    }
+    function hideTooltip() { tooltip.hidden = true; }
+    Array.prototype.forEach.call(wrap.querySelectorAll('.weight-point'), function (point) {
+      point.addEventListener('pointerenter', showTooltip);
+      point.addEventListener('pointerleave', hideTooltip);
+      point.addEventListener('focus', showTooltip);
+      point.addEventListener('blur', hideTooltip);
+    });
   }
 
   function fmtDateTime(iso) {
