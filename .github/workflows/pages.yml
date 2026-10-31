@@ -22,6 +22,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test Python logic
+        run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: Test browser statistics
+        run: node tests/test_stats.js
+      - name: Validate weekly menus
+        run: python scripts/validate_menu.py
       - uses: actions/configure-pages@v5
       - name: Write build timestamp
         run: |
