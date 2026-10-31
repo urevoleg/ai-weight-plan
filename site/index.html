@@ -47,6 +47,14 @@
   ul.weeks li a { display: flex; justify-content: space-between; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; text-decoration: none; color: inherit; }
   ul.weeks li a:hover { border-color: var(--accent); }
   .tag { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+  .reports-panel { margin-top: 40px; }
+  .reports-panel summary { display: flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; font-size: 1.25rem; font-weight: 700; }
+  .reports-panel summary::-webkit-details-marker { display: none; }
+  .reports-panel summary::before { content: "›"; color: var(--accent); font-size: 1.6rem; line-height: 1; transform: rotate(0); transition: transform .16s ease; }
+  .reports-panel[open] summary::before { transform: rotate(90deg); }
+  .reports-panel summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 4px; }
+  .reports-count { color: var(--muted); font-size: .85rem; font-weight: 500; }
+  .reports-content { margin-top: 12px; }
   .legend { display: flex; gap: 16px; font-size: .85rem; color: var(--muted); margin-top: 8px; flex-wrap: wrap; }
   .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
   #report { margin-top: 12px; }
@@ -82,9 +90,13 @@
     </div>
   </div>
 
-  <h2>Недельные отчёты</h2>
-  <ul class="weeks" id="weeks"></ul>
-  <div id="report"></div>
+  <details class="reports-panel" id="reports-panel">
+    <summary>Недельные отчёты <span class="reports-count" id="reports-count"></span></summary>
+    <div class="reports-content">
+      <ul class="weeks" id="weeks"></ul>
+      <div id="report"></div>
+    </div>
+  </details>
 
   <h2>План</h2>
   <div id="plan" class="card"></div>

@@ -26,6 +26,14 @@
     return ('0' + d.getUTCDate()).slice(-2) + '.' + ('0' + (d.getUTCMonth() + 1)).slice(-2);
   }
 
+  function reportWord(n) {
+    var mod100 = n % 100, mod10 = n % 10;
+    if (mod100 >= 11 && mod100 <= 14) return 'отчётов';
+    if (mod10 === 1) return 'отчёт';
+    if (mod10 >= 2 && mod10 <= 4) return 'отчёта';
+    return 'отчётов';
+  }
+
   function parseCsv(text) {
     var rows = [];
     text.split(/\r?\n/).slice(1).forEach(function (line) {
@@ -163,6 +171,7 @@
   }
 
   function weeks(list) {
+    $('reports-count').textContent = list.length + ' ' + reportWord(list.length);
     $('weeks').innerHTML = list.slice().reverse().map(function (w) {
       return '<li><a href="#report=' + w.id + '" data-id="' + w.id + '" data-path="' + w.report + '">' +
         '<span><b>' + w.title + '</b> · ' + w.dates + '</span><span class="tag">' + w.status + '</span></a></li>';
@@ -173,6 +182,7 @@
       if (!m) { el.innerHTML = ''; return; }
       var w = list.filter(function (x) { return x.id === m[1]; })[0];
       if (!w) return;
+      $('reports-panel').open = true;
       get(w.report).then(function (t) {
         el.className = 'card';
         md(el, t);
