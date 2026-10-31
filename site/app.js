@@ -41,12 +41,7 @@
   }
 
   function withAverage(rows) {
-    rows.forEach(function (r) {
-      var win = rows.filter(function (x) { return x.t <= r.t && x.t > r.t - 7 * DAY; });
-      r.avg = win.reduce(function (s, x) { return s + x.w; }, 0) / win.length;
-      r.n = win.length;
-    });
-    return rows;
+    return window.WeightStats.withAverage(rows, 7);
   }
 
   // 95% доверительный интервал среднего за последние WIN дней, оканчивающиеся на rows[i]
@@ -64,12 +59,14 @@
   function stats(rows) {
     var li = rows.length - 1, last = rows[li];
     var c = ciAt(rows, li);
+    var goal = window.WeightStats.goalReached(rows, TARGET_HI, 4);
     var cards = [
       [fmt(last.w), 'последний вес, кг (' + fmtDate(last.t) + ')'],
+      [last.n >= 4 ? fmt(last.avg) : '—', 'среднее за 7 дней, кг'],
       [c ? fmt(c.mean) : '—', 'среднее за 14 дней, кг'],
       [c ? fmt(c.lo) + '–' + fmt(c.hi) : 'мало данных', '95% ДИ, кг (нужно ≥ ' + MIN_N + ' измерений)'],
-      [c ? (c.hi <= TARGET_HI ? 'да' : 'нет') : '—', 'цель достигнута: верхняя граница ≤ 68 кг'],
-      [c ? (c.mean - START > 0 ? '+' : '') + fmt(c.mean - START) : '—', 'среднее к старту (' + fmt(START) + '), кг']
+      [goal == null ? '—' : (goal ? 'да' : 'нет'), 'цель достигнута: среднее за 7 дней ≤ 68 кг'],
+      [c ? (c.mean - START > 0 ? '+' : '') + fmt(c.mean - START) : '—', 'среднее за 14 дней к старту (' + fmt(START) + '), кг']
     ];
     $('stats').innerHTML = cards.map(function (c) {
       return '<div class="stat"><b>' + c[0] + '</b><span>' + c[1] + '</span></div>';

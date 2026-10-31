@@ -46,16 +46,20 @@ def main():
         weeks.setdefault(week_start(d), []).append(w)
     print("| Неделя с | Измерений | Среднее, кг | К прошлой, кг | Мин | Макс | Заметка |")
     print("| --- | --- | --- | --- | --- | --- | --- |")
-    prev = None
+    prev_start = None
+    prev_mean = None
+    prev_ok = False
     for start in sorted(weeks):
         ws = weeks[start]
         mean = sum(ws) / len(ws)
         ok = len(ws) >= MIN_POINTS
-        delta = "" if prev is None else f"{mean - prev:+.2f}"
+        is_previous_week = prev_start is not None and start == prev_start + timedelta(days=7)
+        delta = ""
+        if ok and prev_ok and is_previous_week:
+            delta = f"{mean - prev_mean:+.2f}"
         note = "" if ok else "мало данных"
         print(f"| {start.isoformat()} | {len(ws)} | {mean:.2f} | {delta} | {min(ws):.1f} | {max(ws):.1f} | {note} |")
-        if ok:
-            prev = mean
+        prev_start, prev_mean, prev_ok = start, mean, ok
 
 
 if __name__ == "__main__":
