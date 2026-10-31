@@ -171,7 +171,8 @@
   }
 
   function weeks(list) {
-    $('reports-count').textContent = list.length + ' ' + reportWord(list.length);
+    var reportCount = list.filter(function (w) { return w.status === 'готов'; }).length;
+    $('reports-count').textContent = reportCount + ' ' + reportWord(reportCount);
     $('weeks').innerHTML = list.slice().reverse().map(function (w) {
       return '<li><a href="#report=' + w.id + '" data-id="' + w.id + '" data-path="' + w.report + '">' +
         '<span><b>' + w.title + '</b> · ' + w.dates + '</span><span class="tag">' + w.status + '</span></a></li>';
