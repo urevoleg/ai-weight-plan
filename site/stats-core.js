@@ -32,5 +32,35 @@
     return date + ' · ' + weight.toFixed(1).replace('.', ',') + ' кг';
   }
 
-  return { withAverage: withAverage, goalReached: goalReached, pointLabel: pointLabel };
+  function workoutDeltas(rows) {
+    var byDay = {};
+    rows.forEach(function (row) {
+      var day = String(row.t);
+      if (!byDay[day]) byDay[day] = { t: row.t };
+      if (/утро/i.test(row.note || '')) byDay[day].morning = row.w;
+      if (/после тренировки/i.test(row.note || '')) byDay[day].after = row.w;
+    });
+    return Object.keys(byDay).map(function (day) {
+      var pair = byDay[day];
+      if (pair.morning == null || pair.after == null) return null;
+      return { t: pair.t, morning: pair.morning, after: pair.after, delta: pair.after - pair.morning };
+    }).filter(Boolean).sort(function (a, b) { return a.t - b.t; });
+  }
+
+  function workoutDeltaLabel(pair) {
+    var d = new Date(pair.t);
+    var pad = function (value) { return ('0' + value).slice(-2); };
+    var number = function (value) { return value.toFixed(2).replace(/\.?0+$/, '').replace('.', ','); };
+    var date = pad(d.getUTCDate()) + '.' + pad(d.getUTCMonth() + 1) + '.' + d.getUTCFullYear();
+    var delta = (pair.delta > 0 ? '+' : pair.delta < 0 ? '−' : '') + number(Math.abs(pair.delta));
+    return date + ' · ' + number(pair.morning) + ' → ' + number(pair.after) + ' кг · ' + delta + ' кг';
+  }
+
+  return {
+    withAverage: withAverage,
+    goalReached: goalReached,
+    pointLabel: pointLabel,
+    workoutDeltas: workoutDeltas,
+    workoutDeltaLabel: workoutDeltaLabel
+  };
 }));

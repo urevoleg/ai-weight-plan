@@ -34,6 +34,14 @@
     return 'отчётов';
   }
 
+  function pairWord(n) {
+    var mod100 = n % 100, mod10 = n % 10;
+    if (mod100 >= 11 && mod100 <= 14) return 'сравнений';
+    if (mod10 === 1) return 'сравнение';
+    if (mod10 >= 2 && mod10 <= 4) return 'сравнения';
+    return 'сравнений';
+  }
+
   function parseCsv(text) {
     var rows = [];
     text.split(/\r?\n/).slice(1).forEach(function (line) {
@@ -42,7 +50,7 @@
       var t = Date.parse(p[0] + 'T00:00:00Z');
       var w = parseFloat(p[1]);
       var note = p.slice(2).join(',');
-      if (!isNaN(t) && !isNaN(w) && !/исключ/i.test(note)) rows.push({ t: t, w: w, note: note });
+      if (!isNaN(t) && !isNaN(w)) rows.push({ t: t, w: w, note: note, excluded: /исключ/i.test(note) });
     });
     rows.sort(function (a, b) { return a.t - b.t; });
     return rows;
@@ -153,6 +161,68 @@
     });
   }
 
+  function workoutDeltaChart(pairs) {
+    $('workout-delta-count').textContent = pairs.length + ' ' + pairWord(pairs.length);
+    if (!pairs.length) {
+      $('workout-delta-chart').innerHTML = '<p class="note">Пока нет дней с двумя измерениями.</p>';
+      return;
+    }
+    var W = 780, H = 260, L = 52, R = 16, T = 18, B = 36;
+    var minDelta = Math.min.apply(null, pairs.map(function (p) { return p.delta; }));
+    var maxDelta = Math.max.apply(null, pairs.map(function (p) { return p.delta; }));
+    var ymin = Math.min(-0.2, Math.floor(minDelta * 10) / 10 - 0.1);
+    var ymax = Math.max(0.2, Math.ceil(maxDelta * 10) / 10 + 0.1);
+    var plotW = W - L - R;
+    var slot = plotW / pairs.length;
+    var barW = Math.min(44, slot * 0.56);
+    function x(i) { return L + slot * (i + 0.5); }
+    function y(v) { return T + (ymax - v) / (ymax - ymin) * (H - T - B); }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Изменение веса после тренировки">';
+    for (var i = 0; i <= 4; i++) {
+      var value = ymin + (ymax - ymin) * i / 4;
+      var yy = y(value);
+      s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + yy.toFixed(1) + '" y2="' + yy.toFixed(1) + '" stroke="var(--line)"/>';
+      s += '<text x="' + (L - 8) + '" y="' + (yy + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="var(--muted)">' + fmt(value, 1) + '</text>';
+    }
+    var zeroY = y(0);
+    s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + zeroY.toFixed(1) + '" y2="' + zeroY.toFixed(1) + '" stroke="var(--fg)" stroke-width="1.5"/>';
+    pairs.forEach(function (pair, i) {
+      var valueY = y(pair.delta);
+      var top = Math.min(zeroY, valueY);
+      var height = Math.max(2, Math.abs(valueY - zeroY));
+      var label = window.WeightStats.workoutDeltaLabel(pair);
+      var color = pair.delta <= 0 ? 'var(--dot)' : 'var(--rise)';
+      s += '<rect class="delta-bar" tabindex="0" aria-label="' + label + '" data-label="' + label + '" x="' + (x(i) - barW / 2).toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + height.toFixed(1) + '" rx="5" fill="' + color + '"/>';
+      s += '<text x="' + x(i).toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="11" fill="var(--muted)">' + fmtDate(pair.t) + '</text>';
+    });
+    s += '</svg>';
+    $('workout-delta-chart').innerHTML = s;
+
+    var tooltip = $('workout-delta-tooltip');
+    var wrap = $('workout-delta-wrap');
+    function showTooltip(event) {
+      var bar = event.currentTarget;
+      var barRect = bar.getBoundingClientRect();
+      var wrapRect = wrap.getBoundingClientRect();
+      tooltip.textContent = bar.getAttribute('data-label');
+      tooltip.hidden = false;
+      var left = barRect.left - wrapRect.left + barRect.width / 2;
+      left = Math.max(tooltip.offsetWidth / 2 + 4, Math.min(wrapRect.width - tooltip.offsetWidth / 2 - 4, left));
+      var top = barRect.top - wrapRect.top - 8;
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = top + 'px';
+      tooltip.classList.toggle('below', top < tooltip.offsetHeight);
+      if (top < tooltip.offsetHeight) tooltip.style.top = (barRect.bottom - wrapRect.top + 8) + 'px';
+    }
+    function hideTooltip() { tooltip.hidden = true; }
+    Array.prototype.forEach.call(wrap.querySelectorAll('.delta-bar'), function (bar) {
+      bar.addEventListener('pointerenter', showTooltip);
+      bar.addEventListener('pointerleave', hideTooltip);
+      bar.addEventListener('focus', showTooltip);
+      bar.addEventListener('blur', hideTooltip);
+    });
+  }
+
   function fmtDateTime(iso) {
     var d = new Date(iso);
     if (isNaN(d)) return '';
@@ -199,8 +269,10 @@
   }
 
   Promise.all([get('data/weights.csv'), get('data/weeks.json'), get('plan.md'), meta()]).then(function (r) {
-    var rows = withAverage(parseCsv(r[0]));
+    var entries = parseCsv(r[0]);
+    var rows = withAverage(entries.filter(function (row) { return !row.excluded; }));
     if (rows.length) { START = rows[0].w; stats(rows); chart(rows); }
+    workoutDeltaChart(window.WeightStats.workoutDeltas(entries));
     badges(rows, r[3]);
     weeks(JSON.parse(r[1]));
     md($('plan'), r[2]);

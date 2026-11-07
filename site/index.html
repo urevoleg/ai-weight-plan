@@ -8,18 +8,18 @@
 <style>
   :root {
     --bg: #eef2f8; --fg: #0a1222; --muted: #4a5b76; --card: #ffffff; --line: #d3dcea;
-    --accent: #1e40af; --avg: #0b1f4d; --dot: #2563eb; --band: rgba(37,99,235,.12); --warn: #1e3a8a;
+    --accent: #1e40af; --avg: #0b1f4d; --dot: #2563eb; --rise: #b45309; --band: rgba(37,99,235,.12); --warn: #1e3a8a;
     --zone-yellow: rgba(234,179,8,.22); --zone-green: rgba(34,197,94,.22); --ci: rgba(11,31,77,.14);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #050913; --fg: #e4ebf7; --muted: #8ea0bd; --card: #0b1322; --line: #1b2a44;
-      --accent: #60a5fa; --avg: #bfdbfe; --dot: #3b82f6; --band: rgba(96,165,250,.15); --warn: #93c5fd; --zone-yellow: rgba(250,204,21,.18); --zone-green: rgba(74,222,128,.18); --ci: rgba(191,219,254,.18);
+      --accent: #60a5fa; --avg: #bfdbfe; --dot: #3b82f6; --rise: #fbbf24; --band: rgba(96,165,250,.15); --warn: #93c5fd; --zone-yellow: rgba(250,204,21,.18); --zone-green: rgba(74,222,128,.18); --ci: rgba(191,219,254,.18);
     }
   }
   :root[data-theme="dark"] {
     --bg: #050913; --fg: #e4ebf7; --muted: #8ea0bd; --card: #0b1322; --line: #1b2a44;
-    --accent: #60a5fa; --avg: #bfdbfe; --dot: #3b82f6; --band: rgba(96,165,250,.15); --warn: #93c5fd; --zone-yellow: rgba(250,204,21,.18); --zone-green: rgba(74,222,128,.18); --ci: rgba(191,219,254,.18);
+    --accent: #60a5fa; --avg: #bfdbfe; --dot: #3b82f6; --rise: #fbbf24; --band: rgba(96,165,250,.15); --warn: #93c5fd; --zone-yellow: rgba(250,204,21,.18); --zone-green: rgba(74,222,128,.18); --ci: rgba(191,219,254,.18);
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
@@ -37,6 +37,8 @@
   .chart-wrap { position: relative; }
   .weight-point { cursor: pointer; transition: r .12s ease, stroke-width .12s ease; }
   .weight-point:hover, .weight-point:focus { r: 7px; stroke: var(--fg); stroke-width: 2.5; outline: none; }
+  .delta-bar { cursor: pointer; transition: opacity .12s ease, stroke-width .12s ease; }
+  .delta-bar:hover, .delta-bar:focus { opacity: .78; stroke: var(--fg); stroke-width: 2; outline: none; }
   .chart-tooltip { position: absolute; z-index: 2; transform: translate(-50%, -100%); pointer-events: none; white-space: nowrap; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--fg); color: var(--card); box-shadow: 0 8px 24px rgba(10,18,34,.2); font-size: .82rem; font-weight: 650; }
   .chart-tooltip.below { transform: translate(-50%, 0); }
   table { border-collapse: collapse; width: 100%; font-size: .93rem; }
@@ -69,7 +71,7 @@
 <body>
 <main>
   <h1>План веса: цель 67–68 кг</h1>
-  <p class="sub">Старт 26 октября 2026. Ежедневный вес и тренировки, недельный разбор и корректировки плана.</p>
+  <p class="sub">Первое измерение 26 октября 2026 — 76,4 кг. Ежедневный вес и тренировки, недельный разбор и корректировки плана.</p>
   <div class="badges" id="badges"></div>
   <p id="err" hidden></p>
 
@@ -89,6 +91,17 @@
       <span><i style="background:var(--ci)"></i>95% ДИ за 14 дней</span>
     </div>
   </div>
+
+  <details class="reports-panel" id="workout-delta-panel">
+    <summary>Изменение веса после тренировки <span class="reports-count" id="workout-delta-count"></span></summary>
+    <div class="reports-content card">
+      <div class="chart-wrap" id="workout-delta-wrap">
+        <div id="workout-delta-chart"></div>
+        <div class="chart-tooltip" id="workout-delta-tooltip" role="tooltip" hidden></div>
+      </div>
+      <p class="note">Сравниваются утреннее взвешивание и измерение после тренировки в один день. Эти значения отражают прежде всего изменение жидкости; после тренировок они не входят в основной график и недельную статистику.</p>
+    </div>
+  </details>
 
   <details class="reports-panel" id="reports-panel">
     <summary>Недельные отчёты <span class="reports-count" id="reports-count"></span></summary>
