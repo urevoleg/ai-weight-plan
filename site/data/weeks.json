@@ -10,7 +10,14 @@
     "id": "week-02",
     "title": "Неделя 2",
     "dates": "01.11 – 07.11",
-    "status": "идёт",
+    "status": "готов",
     "report": "reports/week-02.md"
+  },
+  {
+    "id": "week-03",
+    "title": "Неделя 3",
+    "dates": "08.11 – 14.11",
+    "status": "идёт",
+    "report": "reports/week-03.md"
   }
 ]
