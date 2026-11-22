@@ -1,0 +1,409 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ai-weight-plan//menu//RU
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:2026-11-22-breakfast@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261122T081500Z
+DTEND:20261122T084500Z
+SUMMARY:🍳 Завтрак · 521 ккал
+DESCRIPTION:Овсяноблин: Яйца 2 шт. + Молоко 2\,5 % 
+ 100 мл + Овсяные хлопья 40 г + Сыр 20 г\nБанан 
+ 120 г\nНа длительном беге 90–120 мин: 40–60 г 
+ углеводов в час\; на 120 мин — 4 геля по 25 г
+  углеводов (100 г всего). На 90 мин — 3 геля (
+ 75 г\; около 300 ккал)\; дневной итог ниже ра
+ ссчитан для 120 мин. Вода по условиям и пр
+ ивычному режиму. Гели: 4 порции по этике
+ тке. (≈ 400 ккал\, входит в дневной итог)\n[a
+ i-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-22-snack@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261122T101500Z
+DTEND:20261122T104500Z
+SUMMARY:🍎 Перекус · 248 ккал
+DESCRIPTION:Творог 2 % 150 г\nЯблоко 180 г\n[ai-weight-plan
+  week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-22-lunch@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261122T120000Z
+DTEND:20261122T123000Z
+SUMMARY:🍲 Обед · 652 ккал
+DESCRIPTION:Чечевица варёная 150 г\nСалат: огур
+ цы 80 г + помидоры 80 г + листовой салат 40 г 
+ + авокадо 50 г + лимонный сок по вкусу\nБас
+ мати варёный 290 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-22-afternoon@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261122T143000Z
+DTEND:20261122T150000Z
+SUMMARY:🥪 Полдник · 364 ккал
+DESCRIPTION:Греческий йогурт 2 % 200 г\nБанан 120 г
+ \nОвсяные хлопья 30 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-22-dinner@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261122T170000Z
+DTEND:20261122T173000Z
+SUMMARY:🐟 Ужин · 819 ккал
+DESCRIPTION:Лосось запечённый 180 г\nКартофель 
+ варёный 200 г\nОвощи 200 г\nМасло оливковое 
+ 5 г\nПеред сном: Кефир 1 % 250 мл + Миндаль 15 
+ г\nИтого за день: 3004 ккал\, белок 154 г\n[ai-wei
+ ght-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-23-breakfast@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261123T070000Z
+DTEND:20261123T073000Z
+SUMMARY:🍳 Завтрак · 380 ккал
+DESCRIPTION:Творожная запеканка с тыквой и яг
+ одами: Творог 5 % 150 г + Яйца 1 шт. + Овсяная 
+ мука 15 г + Тыква 100 г + Ягоды 100 г\n[ai-weight-plan 
+ week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-23-snack@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261123T093000Z
+DTEND:20261123T100000Z
+SUMMARY:🍎 Перекус · 248 ккал
+DESCRIPTION:Творог 2 % 150 г\nЯблоко 180 г\n[ai-weight-plan
+  week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-23-lunch@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261123T113000Z
+DTEND:20261123T120000Z
+SUMMARY:🍲 Обед · 469 ккал
+DESCRIPTION:Гречка варёная 150 г\nЧечевица варё
+ ная 150 г\nСалат: огурцы 80 г + помидоры 80 г +
+  листовой салат 40 г + авокадо 50 г + лимонн
+ ый сок по вкусу\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-23-afternoon@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261123T140000Z
+DTEND:20261123T143000Z
+SUMMARY:🥪 Полдник · 272 ккал
+DESCRIPTION:Магуро «Тунец с овощами» 230 г\nХле
+ б бородинский 30 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-23-dinner@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261123T170000Z
+DTEND:20261123T173000Z
+SUMMARY:🐟 Ужин · 544 ккал
+DESCRIPTION:Чечевица с овощами и брынзой: Чеч
+ евица варёная 150 г + Овощи 200 г + Брынза 30 
+ г\nХлеб бородинский 30 г\nПеред сном: Твор
+ ог 2 % 100 г + Орехи грецкие 10 г\nИтого за де
+ нь: 1913 ккал\, белок 156 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-24-breakfast@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261124T074500Z
+DTEND:20261124T081500Z
+SUMMARY:🍳 Завтрак · 521 ккал
+DESCRIPTION:Овсяноблин: Яйца 2 шт. + Молоко 2\,5 % 
+ 100 мл + Овсяные хлопья 40 г + Сыр 20 г\nБанан 
+ 120 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-24-snack@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261124T100000Z
+DTEND:20261124T103000Z
+SUMMARY:🍎 Перекус · 248 ккал
+DESCRIPTION:Творог 2 % 150 г\nЯблоко 180 г\n[ai-weight-plan
+  week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-24-lunch@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261124T120000Z
+DTEND:20261124T123000Z
+SUMMARY:🍲 Обед · 663 ккал
+DESCRIPTION:Гречка варёная 250 г\nЧечевица варё
+ ная 150 г\nСалат: огурцы 80 г + помидоры 80 г +
+  листовой салат 40 г + авокадо 50 г + лимонн
+ ый сок по вкусу\nБасмати варёный 70 г\n[ai-we
+ ight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-24-afternoon@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261124T143000Z
+DTEND:20261124T150000Z
+SUMMARY:🥪 Полдник · 314 ккал
+DESCRIPTION:Магуро «Тунец с овощами» 230 г\nХле
+ б бородинский 50 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-24-dinner@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261124T170000Z
+DTEND:20261124T173000Z
+SUMMARY:🐟 Ужин · 607 ккал
+DESCRIPTION:Треска запечённая 180 г\nКартофель 
+ варёный 200 г\nОвощи 200 г\nМасло оливковое 
+ 5 г\nПеред сном: Кефир 1 % 250 мл + Миндаль 15 
+ г\nИтого за день: 2353 ккал\, белок 164 г\n[ai-wei
+ ght-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-25-breakfast@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261125T074500Z
+DTEND:20261125T081500Z
+SUMMARY:🍳 Завтрак · 521 ккал
+DESCRIPTION:Овсяноблин: Яйца 2 шт. + Молоко 2\,5 % 
+ 100 мл + Овсяные хлопья 40 г + Сыр 20 г\nБанан 
+ 120 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-25-snack@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261125T100000Z
+DTEND:20261125T103000Z
+SUMMARY:🍎 Перекус · 289 ккал
+DESCRIPTION:Творог 2 % 150 г\nЯблоко 180 г\nТворог 2 
+ % 40 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-25-lunch@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261125T120000Z
+DTEND:20261125T123000Z
+SUMMARY:🍲 Обед · 820 ккал
+DESCRIPTION:Чечевица варёная 150 г\nСалат: огур
+ цы 80 г + помидоры 80 г + листовой салат 40 г 
+ + авокадо 50 г + лимонный сок по вкусу\nБас
+ мати варёный 430 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-25-afternoon@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261125T143000Z
+DTEND:20261125T150000Z
+SUMMARY:🥪 Полдник · 364 ккал
+DESCRIPTION:Греческий йогурт 2 % 200 г\nБанан 120 г
+ \nОвсяные хлопья 30 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-25-dinner@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261125T170000Z
+DTEND:20261125T173000Z
+SUMMARY:🐟 Ужин · 660 ккал
+DESCRIPTION:Омлет с овощами и басмати: Яйца 2 ш
+ т. + Белки яиц 3 шт. + Овощи 200 г + Басмати в
+ арёный 150 г + Масло оливковое 5 г\nПеред с
+ ном: Кефир 1 % 250 мл + Миндаль 15 г\nИтого за 
+ день: 2654 ккал\, белок 152 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-26-breakfast@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261126T070000Z
+DTEND:20261126T073000Z
+SUMMARY:🍳 Завтрак · 380 ккал
+DESCRIPTION:Творожная запеканка с тыквой и яг
+ одами: Творог 5 % 150 г + Яйца 1 шт. + Овсяная 
+ мука 15 г + Тыква 100 г + Ягоды 100 г\n[ai-weight-plan 
+ week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-26-snack@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261126T093000Z
+DTEND:20261126T100000Z
+SUMMARY:🍎 Перекус · 248 ккал
+DESCRIPTION:Творог 2 % 150 г\nЯблоко 180 г\n[ai-weight-plan
+  week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-26-lunch@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261126T113000Z
+DTEND:20261126T120000Z
+SUMMARY:🍲 Обед · 469 ккал
+DESCRIPTION:Гречка варёная 150 г\nЧечевица варё
+ ная 150 г\nСалат: огурцы 80 г + помидоры 80 г +
+  листовой салат 40 г + авокадо 50 г + лимонн
+ ый сок по вкусу\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-26-afternoon@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261126T140000Z
+DTEND:20261126T143000Z
+SUMMARY:🥪 Полдник · 272 ккал
+DESCRIPTION:Магуро «Тунец с овощами» 230 г\nХле
+ б бородинский 30 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-26-dinner@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261126T170000Z
+DTEND:20261126T173000Z
+SUMMARY:🐟 Ужин · 521 ккал
+DESCRIPTION:Яйца с тыквенной кашей на воде: Яй
+ ца 2 шт. + Овощи 200 г + Тыква 150 г + Басмати в
+ арёный 100 г\nПеред сном: Творог 2 % 100 г + Ор
+ ехи грецкие 10 г\nИтого за день: 1890 ккал\, 
+ белок 152 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-27-breakfast@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261127T074500Z
+DTEND:20261127T081500Z
+SUMMARY:🍳 Завтрак · 437 ккал
+DESCRIPTION:Яичница с овощами: Яйца 2 шт. + Белк
+ и яиц 3 шт. + Овощи 200 г + Масло оливковое 5 
+ г\nХлеб бородинский 75 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-27-snack@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261127T100000Z
+DTEND:20261127T103000Z
+SUMMARY:🍎 Перекус · 248 ккал
+DESCRIPTION:Творог 2 % 150 г\nЯблоко 180 г\n[ai-weight-plan
+  week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-27-lunch@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261127T120000Z
+DTEND:20261127T123000Z
+SUMMARY:🍲 Обед · 687 ккал
+DESCRIPTION:Гречка варёная 250 г\nЧечевица варё
+ ная 150 г\nСалат: огурцы 80 г + помидоры 80 г +
+  листовой салат 40 г + авокадо 50 г + лимонн
+ ый сок по вкусу\nБасмати варёный 90 г\n[ai-we
+ ight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-27-afternoon@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261127T143000Z
+DTEND:20261127T150000Z
+SUMMARY:🥪 Полдник · 364 ккал
+DESCRIPTION:Греческий йогурт 2 % 200 г\nБанан 120 г
+ \nОвсяные хлопья 30 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-27-dinner@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261127T170000Z
+DTEND:20261127T173000Z
+SUMMARY:🐟 Ужин · 616 ккал
+DESCRIPTION:Хек запечённый 180 г\nКартофель вар
+ ёный 200 г\nОвощи 200 г\nМасло оливковое 5 г\n
+ Перед сном: Кефир 1 % 250 мл + Миндаль 15 г\nИ
+ того за день: 2352 ккал\, белок 162 г\n[ai-weight-pl
+ an week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-28-breakfast@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261128T070000Z
+DTEND:20261128T073000Z
+SUMMARY:🍳 Завтрак · 437 ккал
+DESCRIPTION:Яичница с овощами: Яйца 2 шт. + Белк
+ и яиц 3 шт. + Овощи 200 г + Масло оливковое 5 
+ г\nХлеб бородинский 75 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-28-snack@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261128T093000Z
+DTEND:20261128T100000Z
+SUMMARY:🍎 Перекус · 248 ккал
+DESCRIPTION:Творог 2 % 150 г\nЯблоко 180 г\n[ai-weight-plan
+  week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-28-lunch@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261128T113000Z
+DTEND:20261128T120000Z
+SUMMARY:🍲 Обед · 484 ккал
+DESCRIPTION:Басмати варёный 150 г\nЧечевица вар
+ ёная 150 г\nСалат: огурцы 80 г + помидоры 80 г
+  + листовой салат 40 г + авокадо 50 г + лимон
+ ный сок по вкусу\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-28-afternoon@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261128T140000Z
+DTEND:20261128T143000Z
+SUMMARY:🥪 Полдник · 272 ккал
+DESCRIPTION:Магуро «Тунец с овощами» 230 г\nХле
+ б бородинский 30 г\n[ai-weight-plan week-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-28-dinner@ai-weight-plan
+DTSTAMP:20261122T120856Z
+DTSTART:20261128T170000Z
+DTEND:20261128T173000Z
+SUMMARY:🐟 Ужин · 518 ккал
+DESCRIPTION:Омлет с овощами и басмати: Яйца 2 ш
+ т. + Белки яиц 3 шт. + Овощи 200 г + Басмати в
+ арёный 50 г + Масло оливковое 5 г\nПеред сн
+ ом: Творог 2 % 100 г + Орехи грецкие 10 г\nИто
+ го за день: 1959 ккал\, белок 154 г\n[ai-weight-plan w
+ eek-05]
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

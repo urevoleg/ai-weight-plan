@@ -24,7 +24,14 @@
     "id": "week-04",
     "title": "Неделя 4",
     "dates": "15.11 – 21.11",
-    "status": "идёт",
+    "status": "готов",
     "report": "reports/week-04.md"
+  },
+  {
+    "id": "week-05",
+    "title": "Неделя 5",
+    "dates": "22.11 – 28.11",
+    "status": "идёт",
+    "report": "reports/week-05.md"
   }
 ]
